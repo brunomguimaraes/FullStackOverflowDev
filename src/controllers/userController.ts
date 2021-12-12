@@ -1,11 +1,23 @@
 import { Request, Response } from 'express';
+import * as userService from '../services/userService';
+import { userValidation } from '../validations/validations';
+import { User } from '../repositories/userRepository';
 
-async function test(req: Request, res: Response){
-    const tasks = req.body;
-    console.log(tasks);
-    res.sendStatus(248);
-  }
+async function userController(req: Request, res: Response){
+    const user: User = req.body;
+    const { error } = userValidation.validate(user);
+    if(error){
+      res.sendStatus(400);
+    }else{
+      try {
+        const result = await userService.addUserService(user);
+        res.sendStatus(result);
+      } catch (error) {
+        res.sendStatus(500);
+      }
+    }
+}
 
 export{
-    test,
+  userController,
 }
