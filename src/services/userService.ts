@@ -2,17 +2,23 @@ import * as userRepository from '../repositories/userRepository';
 import { User } from '../repositories/userRepository';
 import { v4 as uuid } from 'uuid';
 
-async function addUserService(user:User) {
+interface Return {
+    status: number,
+    value: string,
+}
+
+async function addUserService(user:User): Promise<Return> {
     try {
         const result = await userRepository.checkUser(user);
         if(result === 400){
-            return 409;
+            return {status: 409, value: ''};
         }
-        const newUser: User = {...user, token: uuid() };
+        const token: string = uuid(); 
+        const newUser: User = {...user, token: token };
         const res = await userRepository.addUser(newUser);
-        return res;
+        return {status: res, value: token};
     } catch (error) {
-        return 500;
+        return {status: 500, value: ''};
     }
 }
 
