@@ -11,7 +11,7 @@ async function userController(req: Request, res: Response){
     }else{
       try {
         const result = await userService.addUserService(user);
-        res.sendStatus(result);
+        res.send(result.value).sendStatus(result.status);
       } catch (error) {
         res.sendStatus(500);
       }
