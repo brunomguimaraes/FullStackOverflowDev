@@ -3,7 +3,7 @@ import * as userService from '../services/userService';
 import { userValidation } from '../validations/validations';
 import { User } from '../repositories/userRepository';
 
-async function userController(req: Request, res: Response){
+async function addUserController(req: Request, res: Response){
     const user: User = req.body;
     const { error } = userValidation.validate(user);
     if(error){
@@ -19,5 +19,5 @@ async function userController(req: Request, res: Response){
 }
 
 export{
-  userController,
+  addUserController,
 }
