@@ -1,9 +1,10 @@
 import joi from 'joi';
 
-const testValidation = joi.object({
+const userValidation = joi.object({
   name: joi.string().min(3).required(),
+  class: joi.string().min(2).max(2).required(),
 });
 
 export {
-  testValidation,
+  userValidation,
 };
