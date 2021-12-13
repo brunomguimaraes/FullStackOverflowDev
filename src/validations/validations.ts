@@ -12,7 +12,12 @@ const questionValidation = joi.object({
   tags: joi.string().min(2).required(),
 });
 
+const answerValidation = joi.object({
+  answer: joi.string().min(3).required(),
+});
+
 export {
   userValidation,
   questionValidation,
+  answerValidation,
 };
