@@ -5,6 +5,7 @@ import * as userController from './controllers/userController';
 import * as questionsController from './controllers/questionsController';
 import * as answerController from './controllers/answerController';
 import * as listQuestionsController from './controllers/listQuestionsController'
+import * as getQuestionController from './controllers/getQuestionController'
 
 
 const app = express();
@@ -16,5 +17,6 @@ app.post('/users', userController.addUserController);
 app.post('/questions', questionsController.addQuestionController);
 app.get('/questions', listQuestionsController.getQuestionsController);
 app.post('/questions/:id', auth, answerController.newAnswerController);
+app.get('/questions/:id', getQuestionController.getQuestion);
 
 export default app;
